@@ -1,0 +1,259 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    background-color: #ffffff;
+}
+
+/* MAIN LAYOUT */
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* SIDEBAR */
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: #ffffff;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    box-shadow: 2px 0 15px rgba(0,0,0,0.05);
+}
+
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
+    overflow-y: auto;
+}
+
+/* HEADER */
+.sidebar .head {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+/* PROFILE IMAGE */
+.user-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+/* USER TEXT */
+.user-details .title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+}
+
+.user-details .name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111;
+}
+
+/* MENU */
+.menu {
+    flex: 1;
+}
+
+.menu .title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #999;
+    margin: 15px 0 10px;
+    text-transform: uppercase;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu ul li {
+    margin-bottom: 6px;
+}
+
+.menu ul li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px 12px;
+    border-radius: 10px;
+
+    font-size: 14px;
+    text-decoration: none;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+.menu ul li a:hover {
+    background-color: #f8f9fa;
+    color: #007bff;
+}
+
+.menu ul li.active a {
+    background-color: #007bff;
+    color: white;
+}
+
+/* GLASS OVERLAY */
+.glass-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+.sidebar {
+    width: 280px;
+    height: 100vh;
+    background: #ffffff;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 2px 0 15px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+}
+
+/* HEADER / PROFILE SECTION */
+.sidebar .head {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.user-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+    flex-shrink: 0;
+    object-fit: cover;
+}
+
+.user-details .title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.user-details .name {
+    font-size: 15px;
+    font-weight: 600;
+    color: #111;
+}
+
+/* MENU NAVIGATION */
+.menu {
+    flex: 1;
+    overflow-y: auto; /* Allows menu to scroll if items exceed height */
+}
+
+/* Hide scrollbar for Chrome/Safari */
+.menu::-webkit-scrollbar {
+    width: 0px;
+}
+
+.menu .title {
+    font-size: 11px;
+    font-weight: 600;
+    color: #999;
+    margin: 20px 0 10px;
+    text-transform: uppercase;
+}
+
+.menu ul {
+    list-style: none;
+}
+
+.menu ul li {
+    margin-bottom: 6px;
+}
+
+.menu ul li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #555;
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+/* HOVER & ACTIVE STATES */
+.menu ul li:hover a {
+    background: #f1f3f5;
+    color: #000;
+}
+
+.menu ul li.active a {
+    background: #f1f3f5;
+    color: #000;
+    font-weight: 700;
+}
+
+/* ICON SPACING (If using FontAwesome/Lucide) */
+.menu ul li a i {
+    font-size: 18px;
+    width: 20px;
+    text-align: center;
+}
+
+/* LOGOUT SECTION */
+.logout {
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.logout-btn {
+    width: 100%;
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-family: inherit;
+    font-weight: 600;
+    color: #e03131;
+    transition: 0.2s;
+}
+
+.logout-btn:hover {
+    background: #fff5f5;
+    color: #c92a2a;
+}
