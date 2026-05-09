@@ -386,7 +386,7 @@
                 <div class="chart-card-title">
                     <i class="bi bi-diagram-3"></i>Headcount by Department
                 </div>
-                <div style="position:relative; width:100%; height:{{ max(count($departments ?? []) * 45, 200) }}px;">
+                <div style="position:relative; width:100%; height:{{ max(count($departments ?? []) * 55, 200) }}px; overflow:hidden;">
                     <canvas id="chart-dept-bar"></canvas>
                 </div>
             </div>
@@ -547,7 +547,7 @@
 
     <div class="row g-3 mb-3">
         <div class="col-12 col-lg-8">
-            <div class="chart-card">
+            <div class="chart-card" style="overflow:hidden;">
                 <div class="chart-card-title"><i class="bi bi-diagram-3"></i>Headcount by Department</div>
                 <canvas id="chart-dept-bar" height="120"></canvas>
             </div>
