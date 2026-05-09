@@ -399,7 +399,7 @@
 
 <div class="mobile-topbar">
     <div class="d-flex align-items-center gap-2">
-        <div class="sb-logo">MT</div>
+        <div class="sb-logo"><img src="{{ asset('images/HAHAHA.png') }}" alt="Company Logo" style="width:100%;height:100%;border-radius:16px;"></div>
         <span class="brand-name">MatinaTech</span>
     </div>
     <div class="d-flex align-items-center gap-2">
@@ -409,15 +409,12 @@
     </div>
 </div>
 
-{{-- ── Overlay backdrop ── --}}
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 
 <div class="layout">
 
-    {{-- ══════════ SIDEBAR ══════════ --}}
     <div class="sidebar" id="sidebar">
 
-        {{-- Brand --}}
         <div class="sb-brand">
             <div class="sb-logo">MT</div>
             <div>
@@ -426,7 +423,6 @@
             </div>
         </div>
 
-        {{-- User --}}
         @auth
         <div class="sb-user">
             <div class="sb-avatar">
@@ -443,7 +439,6 @@
         </div>
         @endauth
 
-        {{-- Nav --}}
         <nav class="sb-nav">
             <a href="{{ route('dashboard') }}" class="sb-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
                 <i class="bi bi-grid-1x2"></i> Dashboard
@@ -512,7 +507,6 @@
             @endif
         </nav>
 
-        {{-- Footer --}}
         <div class="sb-footer">
             <form method="GET" action="{{ route('profile.edit') }}" style="flex:1;display:flex;">
                 <button type="submit" class="sb-btn" style="width:100%;">Profile</button>
@@ -523,19 +517,18 @@
             </form>
         </div>
 
-    </div>{{-- /sidebar --}}
+    </div>
 
-    {{-- ══════════ MAIN CONTENT ══════════ --}}
     <div class="main-content flex-fill">
         @yield('content')
     </div>
 
-</div>{{-- /layout --}}
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
-    // ── Hamburger sidebar toggle ──
+
     const toggle   = document.getElementById('sidebarToggle');
     const sidebar  = document.getElementById('sidebar');
     const overlay  = document.getElementById('sidebarOverlay');
@@ -543,7 +536,7 @@
     function openSidebar() {
         sidebar.classList.add('open');
         overlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // prevent background scroll
+        document.body.style.overflow = 'hidden'; 
     }
 
     function closeSidebar() {
@@ -558,7 +551,6 @@
 
     overlay.addEventListener('click', closeSidebar);
 
-    // Close sidebar when a nav link is tapped on mobile
     sidebar.querySelectorAll('.sb-link').forEach(link => {
         link.addEventListener('click', () => {
             if (window.innerWidth < 1024) closeSidebar();

@@ -23,7 +23,6 @@
         margin-top: 4px;
     }
 
-    /* ── Month filter bar ── */
     .filter-bar {
         background: var(--card-bg);
         border: 1px solid var(--border);
@@ -69,7 +68,6 @@
     }
     .filter-btn:hover { opacity: .88; }
 
-    /* ── Section header ── */
     .section-heading {
         font-size: 13px;
         font-weight: 700;
@@ -88,7 +86,6 @@
         background: var(--border);
     }
 
-    /* ── Chart card ── */
     .chart-card {
         background: var(--card-bg);
         border: 1px solid var(--border);
@@ -117,13 +114,11 @@
         flex: 1;
         min-height: 0;
     }
-    /* Donut center label */
     .donut-wrap {
         position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
-        /* Force square so Chart.js renders a circle, not an oval */
         width: 200px;
         height: 200px;
         margin: 0 auto;
@@ -156,7 +151,6 @@
         margin-top: 3px;
     }
 
-    /* Chart legend pills */
     .chart-legend {
         display: flex;
         flex-wrap: wrap;
@@ -179,7 +173,6 @@
         flex-shrink: 0;
     }
 
-    /* ── Progress bar for dept ── */
     .dept-bar-wrap { margin-top: 4px; }
     .dept-bar-track {
         background: #eef0f8;
@@ -194,7 +187,6 @@
         transition: width .5s ease;
     }
 
-    /* ── Empty state ── */
     .empty-state {
         padding: 40px 20px;
         text-align: center;
@@ -203,7 +195,6 @@
     .empty-state i { font-size: 36px; opacity: .35; display: block; margin-bottom: 10px; }
     .empty-state p { font-size: 13.5px; margin: 0; }
 
-    /* ── Role badge chip ── */
     .role-chip {
         display: inline-flex;
         align-items: center;
@@ -220,7 +211,6 @@
     .chip-manager  { background: rgba(59,130,246,.12); color: #3b82f6; }
     .chip-employee { background: rgba(245,158,11,.12); color: #d97706; }
 
-    /* ── Tab navigation ── */
     .report-tabs {
         display: flex;
         gap: 4px;
@@ -319,9 +309,6 @@
     </div>
 </div>
 
-{{-- ═══════════════════════════════════════════
-     ADMIN / HR VIEW
-════════════════════════════════════════════ --}}
 @if(in_array($role, ['admin', 'hr']))
 
 <div class="report-tabs">
@@ -332,15 +319,12 @@
     <button class="rtab" data-tab="departments"><i class="bi bi-diagram-3"></i>Departments</button>
 </div>
 
-{{-- Overview Tab --}}
 <div class="tab-panel active" id="tab-overview">
 
     <div class="section-heading">Overview</div>
 
-    {{-- Row 1: 3 donuts --}}
     <div class="row g-3 mb-3">
 
-        {{-- Employee Status --}}
         <div class="col-12 col-md-4">
             <div class="chart-card">
                 <div class="chart-card-title"><i class="bi bi-people-fill"></i>Employee Status</div>
@@ -359,7 +343,6 @@
             </div>
         </div>
 
-        {{-- Attendance --}}
         <div class="col-12 col-md-4">
             <div class="chart-card">
                 <div class="chart-card-title"><i class="bi bi-calendar-check"></i>Attendance This Month</div>
@@ -378,7 +361,6 @@
             </div>
         </div>
 
-        {{-- Leave Requests --}}
         <div class="col-12 col-md-4">
             <div class="chart-card">
                 <div class="chart-card-title"><i class="bi bi-file-earmark-text"></i>Leave Requests This Month</div>
@@ -398,8 +380,6 @@
         </div>
 
     </div>
-
-    {{-- Row 2: Department bar chart full width --}}
     <div class="row g-3">
         <div class="col-12">
             <div class="chart-card">
@@ -415,7 +395,6 @@
 
 </div>
 
-{{-- Employees Tab --}}
 <div class="tab-panel" id="tab-employees">
     <div class="data-card">
         <div class="data-card-header">
@@ -465,7 +444,6 @@
     </div>
 </div>
 
-{{-- Attendance Tab --}}
 <div class="tab-panel" id="tab-attendance">
     <div class="data-card">
         <div class="data-card-header">
@@ -519,7 +497,6 @@
     </div>
 </div>
 
-{{-- Leave Requests Tab --}}
 <div class="tab-panel" id="tab-leaves">
     <div class="data-card">
         <div class="data-card-header">
@@ -566,10 +543,8 @@
     </div>
 </div>
 
-{{-- Departments Tab --}}
 <div class="tab-panel" id="tab-departments">
 
-    {{-- Horizontal Bar Chart --}}
     <div class="row g-3 mb-3">
         <div class="col-12 col-lg-8">
             <div class="chart-card">
@@ -579,7 +554,6 @@
         </div>
     </div>
 
-    {{-- Department table --}}
     <div class="data-card">
         <div class="data-card-header">
             <span class="data-card-title"><i class="bi bi-diagram-3 me-2"></i>Department Employee Breakdown</span>
@@ -628,12 +602,8 @@
     </div>
 </div>
 
-@endif {{-- end admin/hr --}}
+@endif 
 
-
-{{-- ═══════════════════════════════════════════
-     MANAGER VIEW
-════════════════════════════════════════════ --}}
 @if($role === 'manager')
 
 <div class="report-tabs">
@@ -645,7 +615,6 @@
 
 @php $deptName = $department?->name ?? 'Your Department'; @endphp
 
-{{-- Manager Overview --}}
 <div class="tab-panel active" id="tab-mgr-overview">
 
     <div class="section-heading">{{ $deptName }} — Overview</div>
@@ -690,7 +659,6 @@
     </div>
 </div>
 
-{{-- My Team Tab --}}
 <div class="tab-panel" id="tab-mgr-employees">
     <div class="data-card">
         <div class="data-card-header">
@@ -726,7 +694,6 @@
     </div>
 </div>
 
-{{-- Team Attendance Tab --}}
 <div class="tab-panel" id="tab-mgr-attendance">
     <div class="data-card">
         <div class="data-card-header">
@@ -762,7 +729,6 @@
     </div>
 </div>
 
-{{-- Team Leaves Tab --}}
 <div class="tab-panel" id="tab-mgr-leaves">
     <div class="data-card">
         <div class="data-card-header">
@@ -798,10 +764,6 @@
 
 @endif {{-- end manager --}}
 
-
-{{-- ═══════════════════════════════════════════
-     EMPLOYEE VIEW
-════════════════════════════════════════════ --}}
 @if($role === 'employee')
 
 <div class="report-tabs">
@@ -810,7 +772,6 @@
     <button class="rtab" data-tab="emp-leaves"><i class="bi bi-file-earmark-text"></i>My Leaves</button>
 </div>
 
-{{-- Employee Overview --}}
 <div class="tab-panel active" id="tab-emp-overview">
 
     <div class="section-heading">My Overview</div>
@@ -855,7 +816,6 @@
     </div>
 </div>
 
-{{-- My Attendance Detail --}}
 <div class="tab-panel" id="tab-emp-attendance">
     <div class="data-card">
         <div class="data-card-header">
@@ -886,7 +846,6 @@
     </div>
 </div>
 
-{{-- My Leaves Detail --}}
 <div class="tab-panel" id="tab-emp-leaves">
     <div class="data-card">
         <div class="data-card-header">
@@ -919,7 +878,6 @@
 
 @endsection
 
-{{-- ── All Blade data injected here as JSON — keeps the JS block linter-clean ── --}}
 <script id="report-data" type="application/json">
 {
     "role":              "{{ $role }}",
@@ -945,12 +903,10 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
 <script>
 (function () {
-    // ── Pull data from the JSON island — zero Blade inside this block ──
     const D = JSON.parse(document.getElementById('report-data').textContent);
 
     Chart.defaults.font.family = "'DM Sans', 'Inter', system-ui, sans-serif";
 
-    // ── Donut helper ──────────────────────────────────────────────
     function makeDonut(id, labels, data, colors) {
         const el = document.getElementById(id);
         if (!el) return;
@@ -982,7 +938,6 @@
         });
     }
 
-    // ── Bar chart helper ─────────────────────────────────────────
     function makeDeptBar(id, labels, counts) {
         const el = document.getElementById(id);
         if (!el) return;
@@ -1031,7 +986,6 @@
         });
     }
 
-    // ── Admin / HR ────────────────────────────────────────────────
     if (D.role === 'admin' || D.role === 'hr') {
         makeDonut(
             'chart-emp-status',
@@ -1054,7 +1008,6 @@
         makeDeptBar('chart-dept-bar', D.deptLabels, D.deptCounts);
     }
 
-    // ── Manager ───────────────────────────────────────────────────
     if (D.role === 'manager') {
         makeDonut(
             'chart-mgr-attendance',
@@ -1070,7 +1023,6 @@
         );
     }
 
-    // ── Employee ──────────────────────────────────────────────────
     if (D.role === 'employee') {
         makeDonut(
             'chart-emp-attendance',
@@ -1086,7 +1038,6 @@
         );
     }
 
-    // ── Tab switching ─────────────────────────────────────────────
     document.querySelectorAll('.rtab').forEach(function (btn) {
         btn.addEventListener('click', function () {
             var target   = btn.dataset.tab;
