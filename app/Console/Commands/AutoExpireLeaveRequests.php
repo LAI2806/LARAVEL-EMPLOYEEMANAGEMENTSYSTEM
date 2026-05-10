@@ -13,7 +13,7 @@ class AutoExpireLeaveRequests extends Command
     public function handle()
     {
         LeaveRequest::where('status', 'pending')
-            ->whereDate('start_date', '<=', Carbon::today()) // changed < to <=
+            ->whereDate('start_date', '<', Carbon::today())
             ->update([
                 'status'      => 'rejected',
                 'approved_by' => null,    

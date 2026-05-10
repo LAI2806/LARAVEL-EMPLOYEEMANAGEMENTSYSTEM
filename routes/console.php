@@ -5,8 +5,8 @@ use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Schedule;
 use App\Services\AttendanceService;
 
-Schedule::command('attendance:mark-absent')->everyMinute();
-Schedule::command('leave:auto-expire')->everyMinute();
+Schedule::command('attendance:mark-absent')->dailyAt('00:05');
+Schedule::command('leave:auto-expire')->dailyAt('00:01');
 
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());

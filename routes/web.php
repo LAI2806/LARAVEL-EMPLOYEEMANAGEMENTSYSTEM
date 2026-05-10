@@ -19,6 +19,11 @@ Route::get('/institution', function () {      // ✅ clean URL
     return view('institution.index');
 })->name('institution.index');
 
+Route::get('/run-scheduler', function () {
+    \Illuminate\Support\Facades\Artisan::call('attendance:mark-absent');
+    \Illuminate\Support\Facades\Artisan::call('leave:auto-expire');
+    return response('OK', 200);
+});
 
 Route::get('/debug-middleware', function () {
     $router = app('router');
