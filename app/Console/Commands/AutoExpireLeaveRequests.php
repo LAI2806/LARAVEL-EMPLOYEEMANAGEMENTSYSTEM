@@ -13,11 +13,10 @@ class AutoExpireLeaveRequests extends Command
     public function handle()
     {
         LeaveRequest::where('status', 'pending')
-            ->whereDate('start_date', '<', Carbon::today())
+            ->whereDate('start_date', '<=', Carbon::today()) // changed < to <=
             ->update([
                 'status'      => 'rejected',
-                'approved_by' => null,      // no human — intentionally null
-                'approved_at' => now(),     // ✅ stamp WHEN it was auto-rejected
+                'approved_by' => null,    
             ]);
 
         $this->info('Expired leave requests updated.');

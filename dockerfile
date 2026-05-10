@@ -70,9 +70,10 @@ RUN mkdir -p storage/framework/cache storage/framework/sessions \
 RUN php artisan migrate --force || true
 
 # Add Laravel cron scheduler
-RUN echo "* * * * * root php /var/www/html/artisan schedule:run >> /var/log/laravel-cron.log 2>&1" \
+RUN echo "* * * * * root /usr/local/bin/php /var/www/html/artisan schedule:run >> /var/log/laravel-cron.log 2>&1" \
     > /etc/cron.d/laravel \
-    && chmod 0644 /etc/cron.d/laravel
+    && chmod 0644 /etc/cron.d/laravel \
+    && crontab /etc/cron.d/laravel
 
 # Expose port
 EXPOSE 10000

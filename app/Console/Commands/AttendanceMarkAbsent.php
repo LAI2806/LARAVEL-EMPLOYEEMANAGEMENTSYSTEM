@@ -28,7 +28,7 @@ class AttendanceMarkAbsent extends Command
      */
     public function handle()
 {
-    $date = Carbon::yesterday()->toDateString();
+    $date = Carbon::today()->toDateString(); // changed from yesterday
 
     $employees = Employee::whereHas('user', fn($q) => 
         $q->where('role', 'employee')
