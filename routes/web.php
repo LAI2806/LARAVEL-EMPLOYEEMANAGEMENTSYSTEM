@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\Admin\UserController;
 use App\Http\Controllers\EmployeeController;
@@ -9,21 +10,17 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\ReportController;
-
+use App\Http\Controllers\CronController;
 
 Route::get('/', function () {
     return redirect()->route('login');
 });
 
-Route::get('/institution', function () {      // ✅ clean URL
-    return view('institution.index');
-})->name('institution.index');
-
 Route::get('/run-scheduler', function () {
-    \Illuminate\Support\Facades\Artisan::call('attendance:mark-absent');
-    \Illuminate\Support\Facades\Artisan::call('leave:auto-expire');
-    return response('OK', 200);
+    Artisan::call('schedule:run');
+    return response('ok', 200);
 });
+
 
 Route::get('/debug-middleware', function () {
     $router = app('router');
