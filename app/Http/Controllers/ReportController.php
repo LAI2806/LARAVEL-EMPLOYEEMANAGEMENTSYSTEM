@@ -8,6 +8,7 @@ use App\Models\Employee;
 use App\Models\Department;
 use App\Models\Attendance;
 use App\Models\LeaveRequest;
+use App\Models\User;
 use Carbon\Carbon;
 
 class ReportController extends Controller
@@ -19,7 +20,6 @@ class ReportController extends Controller
         $month = $request->get('month', Carbon::now()->month);
         $year  = $request->get('year',  Carbon::now()->year);
 
-        // ── ADMIN / HR ─────────────────────────────────────────────
         if (in_array($role, ['admin', 'hr'])) {
 
             $totalEmployees    = Employee::count();
@@ -69,7 +69,6 @@ class ReportController extends Controller
             ));
         }
 
-        // ── MANAGER ────────────────────────────────────────────────
         if ($role === 'manager') {
             $department  = Department::where('manager_id', $user->id)->first();
             $deptId      = $department?->id;
@@ -118,7 +117,6 @@ class ReportController extends Controller
             ));
         }
 
-        // ── EMPLOYEE ───────────────────────────────────────────────
         if ($role === 'employee') {
             $employee = $user->employee;
 
@@ -150,4 +148,144 @@ class ReportController extends Controller
 
         abort(403);
     }
+
+        public function exportCsv(Request $request)
+    {
+        $user  = Auth::user();
+        $role  = $user->role;
+        $month = $request->get('month', Carbon::now()->month);
+        $year  = $request->get('year',  Carbon::now()->year);
+        $type  = $request->get('type', 'attendance');
+
+        $filename = $type . '_' . $year . '_' . str_pad($month, 2, '0', STR_PAD_LEFT) . '.csv';
+
+        return response()->stream(function () use ($user, $role, $month, $year, $type) {
+            $handle = fopen('php://output', 'w');
+
+            match ($type) {
+                'attendance' => $this->csvAttendance($handle, $user, $role, $month, $year),
+                'leave'      => $this->csvLeave($handle, $user, $role, $month, $year),
+                'employees'  => $this->csvEmployees($handle),
+                'departments'=> $this->csvDepartments($handle),
+                'users'      => $this->csvUsers($handle),
+                default      => null,
+            };
+
+            fclose($handle);
+        }, 200, [
+            'Content-Type'        => 'text/csv',
+            'Content-Disposition' => 'attachment; filename="' . $filename . '"',
+        ]);
+    }
+
+    private function csvAttendance($handle, $user, $role, $month, $year)
+    {
+        fputcsv($handle, ['Employee', 'Department', 'Date', 'Day', 'Time In', 'Time Out', 'Status', 'Hours', 'Remarks']);
+
+        $query = Attendance::with('employee.department')
+            ->whereMonth('attendance_date', $month)
+            ->whereYear('attendance_date', $year);
+
+        if ($role === 'manager') {
+            $dept = Department::where('manager_id', $user->id)->first();
+            $ids  = Employee::where('department_id', $dept?->id)->pluck('id');
+            $query->whereIn('employee_id', $ids);
+        }
+        if ($role === 'employee') {
+            $query->where('employee_id', $user->employee?->id);
+        }
+
+        foreach ($query->latest('attendance_date')->get() as $a) {
+            fputcsv($handle, [
+                $a->employee?->first_name . ' ' . $a->employee?->last_name,
+                $a->employee?->department?->name ?? '—',
+                $a->attendance_date,
+                Carbon::parse($a->attendance_date)->format('l'),
+                $a->time_in  ?? '—',
+                $a->time_out ?? '—',
+                $a->status,
+                $a->hours_worked ?? 0,
+                $a->remarks ?? '—',
+            ]);
+        }
+    }
+
+    private function csvLeave($handle, $user, $role, $month, $year)
+    {
+        fputcsv($handle, ['Employee', 'Department', 'Leave Type', 'Start Date', 'End Date', 'Status', 'Reason']);
+
+        $query = LeaveRequest::with('employee.department')
+            ->whereMonth('start_date', $month)
+            ->whereYear('start_date', $year);
+
+        if ($role === 'manager') {
+            $dept = Department::where('manager_id', $user->id)->first();
+            $ids  = Employee::where('department_id', $dept?->id)->pluck('id');
+            $query->whereIn('employee_id', $ids);
+        }
+        if ($role === 'employee') {
+            $query->where('employee_id', $user->employee?->id);
+        }
+
+        foreach ($query->latest()->get() as $l) {
+            fputcsv($handle, [
+                $l->employee?->first_name . ' ' . $l->employee?->last_name,
+                $l->employee?->department?->name ?? '—',
+                $l->leave_type ?? '—',
+                $l->start_date,
+                $l->end_date,
+                $l->status,
+                $l->reason ?? '—',
+            ]);
+        }
+    }
+
+    private function csvEmployees($handle)
+    {
+        fputcsv($handle, ['ID', 'First Name', 'Last Name', 'Email', 'Phone', 'Position', 'Department', 'Hire Date', 'Status']);
+
+        foreach (Employee::with('department')->latest()->get() as $e) {
+            fputcsv($handle, [
+                $e->id,
+                $e->first_name,
+                $e->last_name,
+                $e->email,
+                $e->phone ?? '—',
+                $e->position,
+                $e->department?->name ?? '—',
+                $e->hire_date,
+                $e->employment_status,
+            ]);
+        }
+    }
+
+    private function csvDepartments($handle)
+    {
+        fputcsv($handle, ['ID', 'Department Name', 'Manager', 'Total Employees']);
+
+        foreach (Department::withCount('employees')->with('manager')->latest()->get() as $d) {
+            fputcsv($handle, [
+                $d->id,
+                $d->name,
+                $d->manager?->name ?? '—',
+                $d->employees_count,
+            ]);
+        }
+    }
+
+    private function csvUsers($handle)
+    {
+        fputcsv($handle, ['ID', 'Name', 'Email', 'Role', 'Created At']);
+
+        foreach (User::latest()->get() as $u) {
+            fputcsv($handle, [
+                $u->id,
+                $u->name,
+                $u->email,
+                $u->role,
+                $u->created_at->format('Y-m-d'),
+            ]);
+        }
+    }
+
 }

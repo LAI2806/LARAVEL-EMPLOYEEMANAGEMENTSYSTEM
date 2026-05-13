@@ -1,7 +1,6 @@
 
 <div class="sidebar">
 
-        {{-- USER PROFILE --}}
         <div class="head">
             <img src="{{ Auth::user()->profile_photo_url ?? 'https://cdn-icons-png.flaticon.com/512/149/149071.png' }}" class="user-img">
             <div class="user-details">
@@ -10,7 +9,6 @@
             </div>
         </div>
 
-        {{-- NAVIGATION --}}
         <div class="nav">
             <div class="menu">
                 <p class="title">Menu</p>
@@ -33,7 +31,6 @@
 
         <div class="mt-auto">
 
-            {{-- PROFILE DROPDOWN (BREEZE STYLE) --}}
             <div class="dropdown mb-2">
                 <button class="btn btn-light w-100 dropdown-toggle text-start" type="button" data-bs-toggle="dropdown">
                     {{ Auth::user()->name }}
@@ -48,7 +45,6 @@
                 </ul>
             </div>
 
-            {{-- LOGOUT --}}
             <form method="POST" action="{{ route('logout') }}">
                 @csrf
                 <button class="btn btn-danger w-100">
@@ -62,6 +58,7 @@
 
     @role('admin|hr')
 <li><a href="{{ route('employees.index') }}">Employees</a></li>
+<li><a href="{{ route('csv-import.index') }}">CSV Import</a></li>
 @endrole
 
 @role('manager')

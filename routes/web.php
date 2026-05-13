@@ -16,12 +16,21 @@ Route::get('/', function () {
     return redirect()->route('login');
 });
 
+Route::get('/institution', function () {     
+    return view('institution.index');
+})->name('institution.index');
+
 Route::get('/run-scheduler', function () {
     Artisan::call('schedule:run');
     return response('ok', 200);
 });
 
-
+Route::middleware(['auth'])->group(function () {
+    Route::prefix('reports')->name('reports.')->group(function () {
+        Route::get('/', [ReportController::class, 'index'])->name('index');
+        Route::get('/export-csv', [ReportController::class, 'exportCsv'])->name('exportCsv');
+    });
+});
 Route::get('/debug-middleware', function () {
     $router = app('router');
     $middleware = $router->getMiddleware();

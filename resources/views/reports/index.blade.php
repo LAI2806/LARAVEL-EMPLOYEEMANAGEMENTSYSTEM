@@ -253,6 +253,20 @@
         transition: all .15s;
         text-decoration: none;
     }
+
+    .csv-btn {
+        display: inline-flex; align-items: center; gap: 7px;
+        padding: 7px 14px; border-radius: 8px;
+        font-size: 12.5px; font-weight: 600;
+        border: 1px solid var(--border);
+        background: var(--card-bg);
+        color: var(--text-muted);
+        cursor: pointer;
+        font-family: inherit;
+        transition: all .15s;
+        text-decoration: none;
+    }
+    .csv-btn:hover { border-color: #10b981; color: #10b981; background: #f0fdf9; }
     .print-btn:hover { border-color: var(--brand-accent); color: var(--brand-accent); background: #f5f5fd; }
 
     @media print {
@@ -306,9 +320,31 @@
         <button class="print-btn" onclick="window.print()">
             <i class="bi bi-printer"></i> Print
         </button>
+
+        <a href="{{ route('reports.exportCsv', ['month'=>$month,'year'=>$year,'type'=>'attendance']) }}" class="csv-btn">
+            <i class="bi bi-filetype-csv"></i> Attendance
+        </a>
+
+        <a href="{{ route('reports.exportCsv', ['month'=>$month,'year'=>$year,'type'=>'leave']) }}" class="csv-btn">
+            <i class="bi bi-filetype-csv"></i> Leave
+        </a>
+
+        @if(in_array($role, ['admin','hr']))
+        <a href="{{ route('reports.exportCsv', ['type'=>'employees']) }}" class="csv-btn">
+            <i class="bi bi-filetype-csv"></i> Employees
+        </a>
+        <a href="{{ route('reports.exportCsv', ['type'=>'departments']) }}" class="csv-btn">
+            <i class="bi bi-filetype-csv"></i> Departments
+        </a>
+        @endif
+
+        @if($role === 'admin')
+        <a href="{{ route('reports.exportCsv', ['type'=>'users']) }}" class="csv-btn">
+            <i class="bi bi-filetype-csv"></i> Users
+        </a>
+        @endif
     </div>
 </div>
-
 @if(in_array($role, ['admin', 'hr']))
 
 <div class="report-tabs">
