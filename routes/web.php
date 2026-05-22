@@ -24,10 +24,27 @@ Route::get('/institution', function () {
 })->name('institution.index');
 
 Route::get('/cron/mark-absent/28040508', function () {
-    Attendance::whereDate('attendance_date', Carbon::yesterday())
-        ->whereNull('time_in')
-        ->where('status', '!=', 'Leave')
-        ->update(['status' => 'Absent']);
+    $date = Carbon::yesterday()->toDateString();
+
+    $employees = \App\Models\Employee::whereHas('user', fn($q) =>
+        $q->where('role', 'employee')
+    )->get();
+
+    foreach ($employees as $employee) {
+        $exists = Attendance::where('employee_id', $employee->id)
+            ->whereDate('attendance_date', $date)
+            ->exists();
+
+        if (!$exists) {
+            Attendance::create([
+                'employee_id'     => $employee->id,
+                'attendance_date' => $date,
+                'status'          => 'Absent',
+                'time_in'         => null,
+                'time_out'        => null,
+            ]);
+        }
+    }
 
     return response('Absent check complete', 200);
 });
