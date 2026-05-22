@@ -158,12 +158,16 @@
 
                 <div class="mb-3">
                     <label class="login-label">Password</label>
-                    <div class="field-wrap">
+                    <div class="field-wrap" style="position:relative;">
                         <i class="bi bi-lock field-icon"></i>
                         <input type="password"
-                               name="password"
-                               class="login-input @error('password') is-invalid @enderror"
-                               required>
+                            name="password"
+                            id="password"
+                            class="login-input @error('password') is-invalid @enderror"
+                            style="padding-right: 40px;"
+                            required>
+                        <i class="bi bi-eye-slash" id="togglePassword"
+                        style="position:absolute;right:13px;top:50%;transform:translateY(-50%);font-size:16px;color:#c4c4d4;cursor:pointer;"></i>
                     </div>
                     @error('password')
                         <div class="invalid-msg">{{ $message }}</div>
@@ -191,6 +195,21 @@
     </div>
 
 </div>
-
+<script>
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const password = document.getElementById('password');
+        const icon = document.getElementById('togglePassword');
+        
+        if (password.type === 'password') {
+            password.type = 'text';
+            icon.classList.remove('bi-eye-slash');
+            icon.classList.add('bi-eye');
+        } else {
+            password.type = 'password';
+            icon.classList.remove('bi-eye');
+            icon.classList.add('bi-eye-slash');
+        }
+    });
+</script>
 </body>
 </html>
