@@ -24,28 +24,21 @@ Route::get('/institution', function () {
 })->name('institution.index');
 
 Route::get('/cron/mark-absent/28040508', function () {
-
-    Attendance::whereDate('date', Carbon::yesterday())
+    Attendance::whereDate('attendance_date', Carbon::yesterday())
         ->whereNull('time_in')
         ->where('status', '!=', 'Leave')
-        ->update([
-            'status' => 'Absent'
-        ]);
+        ->update(['status' => 'Absent']);
 
     return response('Absent check complete', 200);
 });
 
 Route::get('/cron/expire-leaves/x7H2kP91qZ', function () {
-
-    LeaveRequest::whereDate('leave_date', '<', today())
-        ->where('status', 'Pending')
-        ->update([
-            'status' => 'Rejected'
-        ]);
+    LeaveRequest::where('status', 'Pending')
+        ->whereDate('start_date', '<', today())
+        ->update(['status' => 'Rejected']);
 
     return response('Leave expiration complete', 200);
 });
-
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('reports')->name('reports.')->group(function () {
