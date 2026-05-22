@@ -16,7 +16,7 @@ class DepartmentSeeder extends Seeder
      */
     public function run(): void
     {
-        // Create departments without manager_id for now
+
         Department::create([
             'name' => 'Human Resources',
             'description' => 'Handles employee relations and HR operations',

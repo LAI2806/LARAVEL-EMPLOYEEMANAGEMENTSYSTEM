@@ -25,7 +25,6 @@ public function up()
 
         $table->timestamps();
 
-        // Foreign Key (IMPORTANT)
         $table->foreign('employee_id')
               ->references('id')
               ->on('employees')

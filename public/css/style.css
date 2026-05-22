@@ -11,13 +11,11 @@ body {
     background-color: #ffffff;
 }
 
-/* MAIN LAYOUT */
 .layout {
     display: flex;
     height: 100vh;
 }
 
-/* SIDEBAR */
 .sidebar {
     width: 280px;
     height: 100vh;
@@ -30,13 +28,11 @@ body {
     box-shadow: 2px 0 15px rgba(0,0,0,0.05);
 }
 
-/* MAIN CONTENT */
 .main-content {
     flex: 1;
     overflow-y: auto;
 }
 
-/* HEADER */
 .sidebar .head {
     display: flex;
     align-items: center;
@@ -45,7 +41,6 @@ body {
     border-bottom: 1px solid #eee;
 }
 
-/* PROFILE IMAGE */
 .user-img {
     width: 50px;
     height: 50px;
@@ -55,7 +50,6 @@ body {
     object-fit: cover;
 }
 
-/* USER TEXT */
 .user-details .title {
     font-size: 11px;
     font-weight: 600;
@@ -69,7 +63,6 @@ body {
     color: #111;
 }
 
-/* MENU */
 .menu {
     flex: 1;
 }
@@ -114,7 +107,6 @@ body {
     color: white;
 }
 
-/* GLASS OVERLAY */
 .glass-overlay {
     position: absolute;
     top: 0;
@@ -139,7 +131,6 @@ body {
     top: 0;
 }
 
-/* HEADER / PROFILE SECTION */
 .sidebar .head {
     display: flex;
     align-items: center;
@@ -171,13 +162,11 @@ body {
     color: #111;
 }
 
-/* MENU NAVIGATION */
 .menu {
     flex: 1;
-    overflow-y: auto; /* Allows menu to scroll if items exceed height */
+    overflow-y: auto; 
 }
 
-/* Hide scrollbar for Chrome/Safari */
 .menu::-webkit-scrollbar {
     width: 0px;
 }
@@ -211,7 +200,6 @@ body {
     transition: all 0.2s ease;
 }
 
-/* HOVER & ACTIVE STATES */
 .menu ul li:hover a {
     background: #f1f3f5;
     color: #000;
@@ -223,14 +211,12 @@ body {
     font-weight: 700;
 }
 
-/* ICON SPACING (If using FontAwesome/Lucide) */
 .menu ul li a i {
     font-size: 18px;
     width: 20px;
     text-align: center;
 }
 
-/* LOGOUT SECTION */
 .logout {
     padding-top: 20px;
     border-top: 1px solid #eee;

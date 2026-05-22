@@ -11,7 +11,6 @@ return new class extends Migration
         Schema::table('departments', function (Blueprint $table) {
             $table->unsignedBigInteger('manager_id')->nullable()->after('description');
 
-            // If you want the foreign key:
             $table->foreign('manager_id')
                   ->references('id')
                   ->on('users')

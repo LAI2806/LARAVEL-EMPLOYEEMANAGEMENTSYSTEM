@@ -15,8 +15,6 @@
     </div>
 @endif
 
-{{-- FILTERS --}}
-{{-- FILTERS --}}
 <div class="data-card mb-4">
     <div class="p-3">
         <form method="GET" class="row g-3 align-items-end">
@@ -61,7 +59,8 @@
         </form>
     </div>
 </div>
-{{-- TABLE --}}
+
+
 <div class="data-card">
     <div class="data-card-header">
         <span class="data-card-title">All Records</span>

@@ -137,7 +137,7 @@ class LeaveRequestController extends Controller
         $leave = LeaveRequest::with(['employee.user', 'approver'])
             ->findOrFail($id);
 
-        // Employee can only view their own
+
         if (Auth::user()->role === 'employee') {
             if ($leave->employee_id !== Auth::user()->employeeDetails->id) {
                 abort(403);

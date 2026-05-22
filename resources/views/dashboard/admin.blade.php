@@ -5,7 +5,6 @@
 <h4 class="fw-bold mb-1">Admin Dashboard</h4>
 <p class="text-muted mb-4" style="font-size:13px;">{{ \Carbon\Carbon::now()->format('l, F j, Y') }}</p>
 
-{{-- ── Stats ── --}}
 <div class="row g-3 mb-4">
     <div class="col-6 col-md-4 col-xl-2">
         <div class="stat-card">
@@ -53,7 +52,6 @@
 
 <div class="row g-3 mb-4">
 
-    {{-- Department breakdown --}}
     <div class="col-12 col-xl-7">
         <div class="data-card h-100">
             <div class="data-card-header">
@@ -98,7 +96,6 @@
 
     <div class="col-12 col-xl-5 d-flex flex-column gap-3">
 
-        {{-- Users by role --}}
         <div class="data-card">
             <div class="data-card-header">
                 <span class="data-card-title"><i class="bi bi-people me-2 text-primary"></i>Users by Role</span>
@@ -118,7 +115,6 @@
             </div>
         </div>
 
-        {{-- Quick actions --}}
         <div class="data-card">
             <div class="data-card-header">
                 <span class="data-card-title"><i class="bi bi-lightning me-2 text-warning"></i>Quick Actions</span>
@@ -141,7 +137,6 @@
     </div>
 </div>
 
-{{-- Recent leave requests --}}
 <div class="data-card">
     <div class="data-card-header">
         <span class="data-card-title"><i class="bi bi-clock-history me-2 text-primary"></i>Recent Leave Requests</span>

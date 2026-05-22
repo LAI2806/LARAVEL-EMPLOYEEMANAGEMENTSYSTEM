@@ -15,7 +15,6 @@
 </div>
 @else
 
-{{-- Profile banner --}}
 <div class="p-4 mb-4 rounded-3 d-flex align-items-center gap-4"
      style="background:#ffffff;color:#1a1a2e;">
     <div style="width:60px;height:60px;border-radius:50%;background:var(--brand-accent);
@@ -32,7 +31,7 @@
             <i class="bi bi-calendar3"></i>    Hired: {{ \Carbon\Carbon::parse($employee->hire_date)->format('F j, Y') }}
         </div>
     </div>
-    {{-- Today clock status --}}
+
     <div class="text-end d-none d-md-block">
         @if($todayAttendance)
             <div style="font-size:11px;color:#94a3b8;text-transform:uppercase;letter-spacing:.8px;">Today</div>
@@ -51,7 +50,6 @@
     </div>
 </div>
 
-{{-- Stats --}}
 <div class="row g-3 mb-4">
     <div class="col-6 col-md-4">
         <div class="stat-card" style="display:flex;align-items:center;gap:16px;">
@@ -90,7 +88,6 @@
     </div>
 </div>
 
-{{-- Quick actions --}}
 <div class="data-card mb-4">
     <div class="data-card-header">
         <span class="data-card-title"><i class="bi bi-lightning me-2 text-warning"></i>Quick Actions</span>
@@ -110,7 +107,6 @@
 
 <div class="row g-3">
 
-    {{-- Recent attendance --}}
     <div class="col-12 col-xl-6">
         <div class="data-card h-100">
             <div class="data-card-header">
@@ -151,7 +147,6 @@
         </div>
     </div>
 
-    {{-- My leave requests --}}
     <div class="col-12 col-xl-6">
         <div class="data-card h-100">
             <div class="data-card-header">

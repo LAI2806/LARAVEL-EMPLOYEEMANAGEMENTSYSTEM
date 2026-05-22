@@ -1,6 +1,5 @@
 @extends('layouts.app')
 
-
 @section('content')
 <style>
     .info-grid { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }

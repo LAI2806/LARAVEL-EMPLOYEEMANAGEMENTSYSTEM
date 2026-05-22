@@ -1,13 +1,3 @@
-/*
- * =====================================================================
- *  HRIS — Responsive Patch
- *  Add this inside <head> in your layouts/app.blade.php, AFTER your
- *  existing CSS, so these rules win over inline styles.
- *  e.g.  <link rel="stylesheet" href="{{ asset('css/responsive.css') }}">
- * =====================================================================
- */
-
-/* ── 0. Global base: always allow content to shrink ─────────────────── */
 *,
 *::before,
 *::after { box-sizing: border-box; }
@@ -17,20 +7,12 @@ img, canvas, iframe, video, svg {
     height: auto;
 }
 
-/* ── 1. Page-header rows (title + action button) ─────────────────────
-   Targets both "d-flex justify-content-between" Bootstrap rows AND
-   the raw inline-flex patterns you wrote.
-*/
 .d-flex.justify-content-between,
 .d-flex.align-items-center.justify-content-between {
     flex-wrap: wrap;
     gap: 10px;
 }
 
-/* ── 2. Stat-card grid ───────────────────────────────────────────────
-   Bootstrap's col-md-3 already stacks on xs.
-   This smooths the 2-col tablet middle ground.
-*/
 @media (max-width: 575.98px) {
     .row.g-3 > [class*="col-md-3"],
     .row.g-3 > [class*="col-md-4"] {
@@ -39,12 +21,7 @@ img, canvas, iframe, video, svg {
     }
 }
 
-/* ── 3. Form grids (Create / Edit views) ─────────────────────────────
-   All the inline grid-template-columns:1fr 1fr that never break.
-   We override via a utility class + direct child selectors.
-*/
 @media (max-width: 640px) {
-    /* data-card inner grids */
     [style*="grid-template-columns:1fr 1fr"],
     [style*="grid-template-columns: 1fr 1fr"] {
         display: flex !important;
@@ -52,17 +29,12 @@ img, canvas, iframe, video, svg {
         gap: 14px !important;
     }
 
-    /* grid-column:1/-1 spans become irrelevant but won't break */
     [style*="grid-column:1/-1"],
     [style*="grid-column: 1 / -1"] {
         width: 100%;
     }
 }
 
-/* ── 4. Filter bars ──────────────────────────────────────────────────
-   The row g-3 align-items-end forms wrap correctly with Bootstrap,
-   but the raw inline flex ones need help.
-*/
 @media (max-width: 640px) {
     /* raw flex filter bars */
     [style*="display:flex;gap:12px;align-items:flex-end"],
@@ -70,7 +42,6 @@ img, canvas, iframe, video, svg {
         flex-wrap: wrap !important;
     }
 
-    /* attendance history inline filter row in data-card-header */
     .data-card-header {
         flex-wrap: wrap !important;
         gap: 10px !important;
@@ -89,16 +60,11 @@ img, canvas, iframe, video, svg {
     }
 }
 
-/* ── 5. Tables ───────────────────────────────────────────────────────
-   All tables already have overflow-x:auto or .table-responsive.
-   This makes sure the scroll wrapper never collapses.
-*/
 .table-responsive,
 [style*="overflow-x:auto"] {
     -webkit-overflow-scrolling: touch;
 }
 
-/* On very small phones, shrink table text slightly so more fits */
 @media (max-width: 480px) {
     .hris-table th,
     .hris-table td {
@@ -108,7 +74,7 @@ img, canvas, iframe, video, svg {
     }
 
     .emp-avatar {
-        display: none !important; /* hide avatar in table cells to save space */
+        display: none !important; 
     }
 
     .emp-info {
@@ -116,10 +82,6 @@ img, canvas, iframe, video, svg {
     }
 }
 
-/* ── 6. Employee profile banner ──────────────────────────────────────
-   The "d-flex align-items-center gap-4" banner on the employee
-   dashboard squishes on small screens.
-*/
 @media (max-width: 640px) {
     .p-4.mb-4.rounded-3.d-flex {
         flex-direction: column !important;
@@ -127,16 +89,12 @@ img, canvas, iframe, video, svg {
         gap: 14px !important;
     }
 
-    /* Reveal the hidden "Today" clock block on mobile */
     .text-end.d-none.d-md-block {
         display: block !important;
         text-align: left !important;
     }
 }
 
-/* ── 7. Quick-action buttons ─────────────────────────────────────────
-   Already flex-wrap, but force full-width on tiny phones.
-*/
 @media (max-width: 400px) {
     .p-3.d-flex.flex-wrap.gap-2 > a {
         flex: 1 1 100%;
@@ -144,7 +102,6 @@ img, canvas, iframe, video, svg {
     }
 }
 
-/* ── 8. data-card padding on mobile ─────────────────────────────────*/
 @media (max-width: 480px) {
     [style*="padding:24px"] {
         padding: 14px !important;
@@ -155,9 +112,6 @@ img, canvas, iframe, video, svg {
     }
 }
 
-/* ── 9. Page-header titles ───────────────────────────────────────────
-   Prevent the h4 + subtitle from overflowing next to a button.
-*/
 .d-flex.align-items-center.justify-content-between > div:first-child,
 .d-flex.justify-content-between > div:first-child {
     min-width: 0;
@@ -170,9 +124,6 @@ img, canvas, iframe, video, svg {
     white-space: nowrap;
 }
 
-/* ── 10. User show/detail grid ───────────────────────────────────────
-   The 2-col info grid inside User Show.
-*/
 @media (max-width: 480px) {
     [style*="display:grid;grid-template-columns:1fr 1fr;gap:14px"] {
         display: flex !important;
@@ -182,16 +133,10 @@ img, canvas, iframe, video, svg {
     }
 }
 
-/* ── 11. Button rows (Cancel / Submit) ───────────────────────────────
-   Already flex, but ensure wrapping so buttons don't overflow.
-*/
 [style*="display:flex;gap:10px"] {
     flex-wrap: wrap;
 }
 
-/* ── 12. Report / dashboard tab panels ───────────────────────────────
-   Chart containers need a min-height so they don't collapse.
-*/
 @media (max-width: 640px) {
     .report-tabs {
         flex-wrap: wrap;
@@ -205,16 +150,11 @@ img, canvas, iframe, video, svg {
         padding: 6px 10px !important;
     }
 
-    /* chart canvases */
     canvas {
         max-height: 220px !important;
     }
 }
 
-/* ── 13. Tablet tweaks (641 – 1023 px) ──────────────────────────────
-   Most Bootstrap cols already handle this, but the raw inline grids
-   need a middle stop.
-*/
 @media (min-width: 641px) and (max-width: 1023px) {
     [style*="grid-template-columns:1fr 1fr"],
     [style*="grid-template-columns: 1fr 1fr"] {

@@ -15,17 +15,14 @@ class DepartmentController extends Controller
 
         $query = Department::with('manager');
 
-        // Manager only sees their own department
         if ($currentUser->role === 'manager') {
             $query->where('manager_id', $currentUser->id);
         }
 
-        // ✅ Search by department name
         if ($request->filled('search')) {
             $query->where('name', 'like', '%' . $request->search . '%');
         }
 
-        // ✅ Filter by status
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }

@@ -2,7 +2,6 @@
 
 @section('content')
 
-{{-- HEADER --}}
 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;">
     <div>
         <h4 style="font-size:20px;font-weight:700;color:var(--text-primary);margin:0;">My Attendance</h4>
@@ -21,11 +20,9 @@
     </div>
 @endif
 
-{{-- TIME IN/OUT CARD --}}
 <div class="data-card" style="margin-bottom:16px;">
     <div style="padding:20px 24px;display:flex;justify-content:space-between;align-items:center;gap:16px;">
 
-        {{-- User info --}}
         <div style="display:flex;align-items:center;gap:12px;">
             <div style="width:48px;height:48px;border-radius:50%;background:#eeeeff;color:#6366f1;font-size:18px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;">
                 {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
@@ -36,13 +33,11 @@
             </div>
         </div>
 
-        {{-- Clock --}}
         <div style="text-align:center;">
             <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);margin-bottom:4px;">Current Time</div>
             <div id="clock" style="font-size:22px;font-weight:700;color:#6366f1;font-family:'DM Mono',monospace;"></div>
         </div>
 
-        {{-- Action button --}}
         <div>
             @if(!$attendanceToday)
                 <form method="POST" action="{{ route('attendance.timeIn') }}">
@@ -70,7 +65,6 @@
         </div>
     </div>
 
-    {{-- Today's summary --}}
     @if($attendanceToday)
     <div style="display:flex;border-top:1px solid var(--border);">
         <div style="flex:1;text-align:center;padding:14px;border-right:1px solid var(--border);">
@@ -103,7 +97,6 @@
     @endif
 </div>
 
-{{-- ATTENDANCE HISTORY --}}
 <div class="data-card">
     <div class="data-card-header">
         <span class="data-card-title">Attendance History</span>

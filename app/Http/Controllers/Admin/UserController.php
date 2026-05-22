@@ -87,7 +87,6 @@ class UserController extends Controller
         $firstName = $nameParts[0];
         $lastName  = $nameParts[1] ?? '';
 
-        // HR Department Auto Assignment
         $departmentId = null;
 
         if ($request->role === 'hr') {
@@ -97,7 +96,6 @@ class UserController extends Controller
             $departmentId = $hrDepartment?->id;
         }
 
-        // CREATE USER
         $user = User::create([
             'name'     => $request->name,
             'email'    => $request->email,
@@ -105,7 +103,6 @@ class UserController extends Controller
             'role'     => $request->role,
         ]);
 
-        // CREATE EMPLOYEE
         Employee::create([
             'user_id'           => $user->id,
             'first_name'        => $firstName,

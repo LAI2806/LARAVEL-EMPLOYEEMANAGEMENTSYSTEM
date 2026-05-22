@@ -9,7 +9,6 @@
     </div>
 </div>
 
-{{-- STAT CARDS --}}
 <div class="row g-3 mb-4">
     <div class="col-md-3">
         <div class="stat-card">
@@ -41,7 +40,6 @@
     </div>
 </div>
 
-{{-- FILTERS --}}
 <div class="data-card mb-4">
     <div class="p-3">
         <form method="GET" class="row g-3 align-items-end">
@@ -83,7 +81,7 @@
         </form>
     </div>
 </div>
-{{-- TABLE --}}
+
 <div class="data-card">
     <div class="data-card-header">
         <span class="data-card-title">Team Records</span>

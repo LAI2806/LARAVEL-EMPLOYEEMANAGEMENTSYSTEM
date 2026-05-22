@@ -36,9 +36,6 @@ class DashboardController extends Controller
         }
     }
 
-    // ─────────────────────────────────────────────
-    // ADMIN DASHBOARD
-    // ─────────────────────────────────────────────
     private function adminDashboard(Carbon $today)
     {
         $data = [
@@ -68,9 +65,6 @@ class DashboardController extends Controller
         return view('dashboard.admin', $data);
     }
 
-    // ─────────────────────────────────────────────
-    // HR DASHBOARD
-    // ─────────────────────────────────────────────
     private function hrDashboard(Carbon $today)
     {
         $data = [
@@ -103,12 +97,9 @@ class DashboardController extends Controller
         return view('dashboard.hr', $data);
     }
 
-    // ─────────────────────────────────────────────
-    // MANAGER DASHBOARD
-    // ─────────────────────────────────────────────
     private function managerDashboard(User $user, Carbon $today)
     {
-        // Find the department this manager manages
+
         $department = Department::where('manager_id', $user->id)->first();
         $employeeIds = $department
             ? Employee::where('department_id', $department->id)->pluck('id')
@@ -193,12 +184,12 @@ class DashboardController extends Controller
 
     public function employee(Employee $employee)
     {
-        return $this->index(request()); // Just reuse the working index method
+        return $this->index(request()); 
     }
 
     
     public function manager(User $user)
     {
-        return $this->index(request()); // Just reuse the working index method
+        return $this->index(request()); 
     }
 }

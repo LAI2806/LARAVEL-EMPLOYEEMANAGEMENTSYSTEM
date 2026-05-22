@@ -25,7 +25,6 @@ public function report(Request $request)
         });
     }
 
-    // ✅ STATUS FILTER for HR/Admin report
     if ($request->status) {
         $query->where('status', $request->status);
     }

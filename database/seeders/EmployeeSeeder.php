@@ -17,13 +17,11 @@ class EmployeeSeeder extends Seeder
      */
     public function run(): void
     {
-        // Get departments
         $hrDept = Department::where('name', 'Human Resources')->first();
         $itDept = Department::where('name', 'Information Technology')->first();
         $financeDept = Department::where('name', 'Finance')->first();
         $marketingDept = Department::where('name', 'Marketing')->first();
 
-        // Create HR Manager
         if ($hrDept) {
             $hrUser = User::create([
                 'name' => 'HR Manager',
@@ -46,7 +44,6 @@ class EmployeeSeeder extends Seeder
             ]);
         }
 
-        // Create IT Manager
         if ($itDept) {
             $itUser = User::create([
                 'name' => 'IT Manager',
@@ -69,7 +66,6 @@ class EmployeeSeeder extends Seeder
             ]);
         }
 
-        // Create regular employees
         if ($financeDept) {
             $employee1 = User::create([
                 'name' => 'John Doe',

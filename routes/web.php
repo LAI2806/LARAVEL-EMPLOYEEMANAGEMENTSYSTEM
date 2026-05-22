@@ -11,6 +11,9 @@ use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\LeaveRequestController;
 use App\Http\Controllers\ReportController;
 use App\Http\Controllers\CronController;
+use App\Models\Attendance;
+use Carbon\Carbon;
+use App\Models\LeaveRequest;
 
 Route::get('/', function () {
     return redirect()->route('login');
@@ -20,10 +23,29 @@ Route::get('/institution', function () {
     return view('institution.index');
 })->name('institution.index');
 
-Route::get('/run-scheduler', function () {
-    Artisan::call('schedule:run');
-    return response('ok', 200);
+Route::get('/cron/mark-absent/28040508', function () {
+
+    Attendance::whereDate('date', Carbon::yesterday())
+        ->whereNull('time_in')
+        ->where('status', '!=', 'Leave')
+        ->update([
+            'status' => 'Absent'
+        ]);
+
+    return response('Absent check complete', 200);
 });
+
+Route::get('/cron/expire-leaves/x7H2kP91qZ', function () {
+
+    LeaveRequest::whereDate('leave_date', '<', today())
+        ->where('status', 'Pending')
+        ->update([
+            'status' => 'Rejected'
+        ]);
+
+    return response('Leave expiration complete', 200);
+});
+
 
 Route::middleware(['auth'])->group(function () {
     Route::prefix('reports')->name('reports.')->group(function () {
